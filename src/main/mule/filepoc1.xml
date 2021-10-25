@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="af0a0f38-2394-4ef2-9966-8bbda3f1ef5c" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<file:config name="File_Config" doc:name="File Config" doc:id="c6301536-6b16-4484-a69f-6cdc0cfff4cd" >
+		<file:connection workingDir="C:\Users\Vikash\OneDrive\Desktop\test" />
+	</file:config>
+	<flow name="filepoc1Flow" doc:id="b8211f57-9ec8-4dfd-92db-742b927668d2" >
+		<http:listener doc:name="Listener" doc:id="7433bfc9-fa7a-4447-b016-6ae1fb00ba5f" config-ref="HTTP_Listener_config" path="/test"/>
+		<file:write doc:name="Write" doc:id="6113c3b8-888d-4306-a970-119bfba977d5" config-ref="File_Config" path="C:\Users\Vikash\OneDrive\Desktop\test\text.txt" mode="APPEND">
+			<file:content ><![CDATA[mule world]]></file:content>
+		</file:write>
+	</flow>
+</mule>
